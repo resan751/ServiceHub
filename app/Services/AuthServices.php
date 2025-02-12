@@ -16,6 +16,7 @@ class AuthServices
 {
     public function authenticate(Request $request): RedirectResponse
     {
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -23,10 +24,17 @@ class AuthServices
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $User = Auth::user();
 
             Log::info("Login successful", ['email' => $request->email, 'ip' => $request->ip()]);
 
-            return redirect()->route('dash');
+            if ($User->role === 'admin') {
+                return redirect()->route('dashboard.index');
+            } else {
+                return redirect()->route('home.index');
+            }
+        } else {
+            return back();
         }
 
     }
@@ -42,7 +50,7 @@ class AuthServices
         User::create([
             'username' => $ValidatedData['username'],
             'email' => $ValidatedData['email'],
-            'password' => bcrypt($ValidatedData['username']),
+            'password' => bcrypt($ValidatedData['password']),
         ]);
 
         return redirect('/');

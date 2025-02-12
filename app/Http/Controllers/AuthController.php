@@ -7,7 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Services\AuthServices;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -66,7 +66,7 @@ class AuthController extends Controller
         return view('form.upuser', compact('User'));
     }
 
-    public function Update(Request $request, $id_user): RedirectResponse
+    public function update(Request $request, $id_user): RedirectResponse
     {
         $request->validate([
             'username' => 'required|min:5',
@@ -77,14 +77,14 @@ class AuthController extends Controller
 
         $User = User::findOrFail($id_user);
 
-        $User->Update([
+        $User->update([
             'username' => $request->username,
             'role' => $request->role,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('barang.index');
+        return redirect()->route('dashboard.index');
     }
 
     public function destroy($id_user): Redirectresponse

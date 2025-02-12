@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\JasaController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,9 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // layout
 route::get('home', [HomeController::class, 'index'])->name('home.index');
+route::get('list', [ListController::class, 'index'])->name('list.index');
+route::get('list/back', [ListController::class, 'back'])->name('list.back');
+
 
 // crud
 

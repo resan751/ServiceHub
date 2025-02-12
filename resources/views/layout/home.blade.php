@@ -39,15 +39,20 @@
                     <div class="nav-txt flex items-center relative">
                         <div class="nav-txt px-1 font-medium text-lg flex items-center cursor-pointer text-white5"
                             id="userDropdown">
-                            <p>username</p>
+                            @auth
+                            <p>{{ Auth::user()->username}}</p>
+                            @endauth
                             <i class='bx bx-chevron-down'></i>
                         </div>
                         <div id="dropdownMenu"
                             class="hidden absolute right-0 top-7 shadow-lg rounded-lg w-32 transition-all duration-500">
                             <ul class="">
                                 <li class="">
-                                    <div class="btn mx-2"><button
-                                            class="bg-white py-1 px-5 rounded-md items-center border-2 border-orange-500 text-orange-500 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-500 w-full ">logout</button>
+                                    <div class="btn mx-2">
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button class="bg-white py-1 px-5 rounded-md items-center border-2 border-orange-500 text-orange-500 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-500 w-full ">logout</button>
+                                        </form>
                                     </div>
                                 </li>
                             </ul>
@@ -72,8 +77,8 @@
         </div>
     </nav>
     <div class="button absolute top-72 left-[31rem]">
-        <button class="bg-black4 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black4 transition-colors duration-500"><a href="http://"><i class='bx bxs-data'></i>pendataan</a></button>
-        <button class="bg-black4 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black4 transition-colors duration-500"><a href="http://"><i class='bx bxs-data'></i>list data </a></button>
+        <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="http://"><i class='bx bxs-data'></i>pendataan</a></button>
+        <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="list"><i class='bx bxs-data'></i>list data </a></button>
     </div>
     <div class="main bg-white7 w-full h-[291px] mt-[285px]">
         <div class="main-back">

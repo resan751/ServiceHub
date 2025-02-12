@@ -24,28 +24,29 @@
 </style>
 </head>
 <body class=" font-jakarta">
+    <div class="bg-black3 opacity-50 h-full w-3/6 absolute left-[680px]"></div>
     <form action="{{ route('register') }}" method="post">
         @csrf
-        <div class="register h-full bg-white3 w-3/6">
+        <div class="register h-full bg-black3 w-3/6">
             <div class="back w-full ">
-                <button class="text-white bg-black p-1 text-center mt-1 ml-1 rounded-md hover:bg-white hover:text-black">
+                <button class="text-white5 bg-black4 p-1 text-center mt-1 ml-1 rounded-md hover:bg-white5 hover:text-black4 transition-colors duration-500">
                     <i class='bx bx-left-arrow-alt'></i>
                     <a href="/">back</a>
                 </button>
             </div>
             <div class="register-back flex justify-center">
                 <div class="register-menu w-4/6 h-full  ">
-                    <div class="register-head text-center text-6xl pt-12 text-black2 font-black">
+                    <div class="register-head text-center text-6xl pt-12 text-white5 font-black">
                         <h1>REGISTER</h1>
                     </div>
-                    <div class="logo text-center text-9xl pt-10">
+                    <div class="logo text-center text-9xl pt-10 text-white5">
                         <i class='bx bx-user-plus'></i>
                     </div>
                     <div class="register-input pt-10"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="text" placeholder="Username" name="username" id=""></div>
                     <div class="register-input pt-4"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="email" placeholder="email" name="email" id=""></div>
                     <div class="register-input pt-4"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="password" placeholder="Password" name="password" id=""></div>
                     <div class="register-btn">
-                        <div class="btn w-full p-2 mt-20 bg-black text-white2 hover:text-white rounded-lg text-center"><button class="w-full" type="submit"><i class='bx bx-log-in'></i>register</button></div>
+                        <div class="btn w-full p-2 mt-20 bg-black4 text-white5 hover:text-black3 hover:bg-white5 transition-colors duration-500 rounded-lg text-center"><button class="w-full" type="submit"><i class='bx bx-log-in'></i>register</button></div>
                     </div>
                 </div>
             </div>

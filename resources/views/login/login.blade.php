@@ -23,21 +23,22 @@
 </head>
 
 <body class=" font-jakarta">
+    <div class="bg-black3 opacity-50 h-full w-3/6 absolute left-[680px]"></div>
     <form action="{{ route('login.aunthenticate') }}" method="post">
         @csrf
         <div class="login h-full">
-            <div class="login-back bg-white3 w-3/6 h-full flex justify-center">
+            <div class="login-back bg-black3 w-3/6 h-full flex justify-center">
                 <div class="login-menu w-4/6 h-full  ">
-                    <div class="login-head text-center text-6xl pt-12 text-black2 font-black font-poppin">
+                    <div class="login-head text-center text-6xl pt-12 text-white5 font-bold">
                         <h1>LOGIN</h1>
                     </div>
-                    <div class="logo text-center text-9xl pt-10">
+                    <div class="logo text-center text-9xl pt-10 text-white5">
                         <i class='bx bx-user'></i>
                     </div>
                     <div class="login-input pt-10">
-                        <input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="text"
-                            placeholder="username" name="username" id="" required></div>
-                    @error('username')
+                        <input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="email"
+                            placeholder="email" name="email" id="" required></div>
+                    @error('email')
                         <div>{{ $message }}</div>
                     @enderror
                     <div class="login-input pt-4 relative flex items-center justify-center">
@@ -50,11 +51,11 @@
                     @error('username')
                         <div>{{ $message }}</div>
                     @enderror
-                    <div class="login-txt pt-4 ml-96 text-black2 text-lg font-bold hover:text-white1 w-18">
+                    <div class="login-txt pt-4 ml-96 text-white3 text-lg font-bold hover:text-white5 transition-colors duration-300 w-18">
                         <a href="register">register</a>
                     </div>
                     <div class="login-btn">
-                        <div class="btn w-full h-10 bg-black text-white2 mt-28 rounded-lg text-center hover:text-white">
+                        <div class="btn w-full h-10 bg-black4 text-white5 mt-28 rounded-lg text-center hover:text-black3 hover:bg-white5 transition-colors duration-500">
                             <button class="w-full pt-2 " type="submit"><i class='bx bx-log-in'></i>Login</button></div>
                     </div>
                 </div>
