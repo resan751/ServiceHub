@@ -153,7 +153,7 @@
                             <tr>
                                 <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_barang }}</td>
                                 <td class=" border-b-2 border-black">{{ $list->nama_barang }}</td>
-                                <td class=" border-b-2 border-black">{{ $list->harga_barang }}</td>
+                                <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_barang, 0, ',', '.') }}</td>
                                 <td class=" border-b-2 border-black">{{ $list->stok }}</td>
                                 <td class=" border-b-2 border-black h-9"><button
                                         class="  bg-amber-500 hover:bg-amber-600 p-1 rounded transition transform hover:scale-95"><a

@@ -102,7 +102,7 @@
                                 <tr>
                                     <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_barang }}</td>
                                     <td class=" border-b-2 pl-2 border-black">{{ $list->nama_barang }}</td>
-                                    <td class=" border-b-2 border-black">{{ $list->harga_barang }}</td>
+                                    <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_barang, 0, ',', '.') }}</td>
                                     <td class=" border-r-2 border-b-2 border-black">{{ $list->stok }}</td>
                                 </tr>
                             @empty
@@ -122,7 +122,7 @@
                             <tr>
                                 <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_jasa }}</td>
                             <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
-                            <td class=" border-r-2 border-b-2 border-black">{{ $list->harga_jasa }}</td>
+                            <td class=" border-r-2 border-b-2 border-black">Rp{{ number_format($list->harga_jasa, 0, ',', '.' ) }}</td>
                           </tr>
                           @empty
 

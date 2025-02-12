@@ -69,7 +69,7 @@
                             <tr>
                                 <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_jasa }}</td>
                             <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
-                            <td class=" border-b-2 border-black">{{ $list->harga_jasa }}</td>
+                            <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_jasa, 0, ',', '.' ) }}</td>
                             <td class=" border-b-2 border-black h-9 "><button class="bg-amber-500 hover:bg-amber-600 p-1 rounded transition transform hover:scale-95"><a class=" p-1 font-semibold" href="{{ route('jasa.edit', $list->id_jasa) }}">Update</a></button></td>
                             <form action="{{ route('jasa.destroy', $list->id_jasa) }}" method="post">
                                 @csrf
