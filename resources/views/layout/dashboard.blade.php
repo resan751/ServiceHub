@@ -20,8 +20,8 @@
     </style>
 </head>
 
+<nav>
 <body class=" font-jakarta bg-black3 flex">
-    <nav>
         <div class="nav h-full w-48">
             <div class="nav-back">
                 <div class="nav-head text-white text-lg font-bold p-1 pt-1">
@@ -94,7 +94,7 @@
                         Total User: {{ $adminCount + $userCount }}
                     </p>
                     <p class="  font-semibold text-2xl ml-2 mr-2 w-72 h-22 p-3 rounded-lg bg-white border-2 border-black shadow-lg shadow-admin">
-                        admin: {{ $adminCount }} 
+                        admin: {{ $adminCount }}
                     </p>
                     <p class="  font-semibold text-2xl ml-2 mr-2 w-72 h-22 p-3 rounded-lg bg-white border-2 border-black shadow-lg shadow-user">
                         User: {{ $userCount }}

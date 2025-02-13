@@ -36,6 +36,17 @@
             </div>
         </div>
     </nav>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Mencegah penghapusan langsung sebelum konfirmasi
+            let confirmAction = confirm("Apakah Anda yakin ingin menghapus data ini?");
+            if (confirmAction) {
+                event.target.closest("form").submit(); // Melanjutkan penghapusan jika konfirmasi "OK"
+            } else {
+                alert("Penghapusan dibatalkan.");
+            }
+        }
+    </script>
      <div class="main bg-white w-10/12 ml-4 mt-3 h-[38rem] rounded-3xl    ">
         <div class="main-back">
             <div class="main-menu">
@@ -71,7 +82,7 @@
                             <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
                             <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_jasa, 0, ',', '.' ) }}</td>
                             <td class=" border-b-2 border-black h-9 "><button class="bg-amber-500 hover:bg-amber-600 p-1 rounded transition transform hover:scale-95"><a class=" p-1 font-semibold" href="{{ route('jasa.edit', $list->id_jasa) }}">Update</a></button></td>
-                            <form action="{{ route('jasa.destroy', $list->id_jasa) }}" method="post">
+                            <form action="{{ route('jasa.destroy', $list->id_jasa) }}" method="post" onsubmit="return confirmDelete(event)">
                                 @csrf
                                 @method('DELETE')
                                 <td class=" border-b-2 border-r-2 border-black h-9" ><button class=" bg-red-600 hover:bg-red-700 p-1 rounded transition transform hover:scale-95" type="submit">Delete</button></td>

@@ -13,15 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $user = [
-        //     [
-        //         'username' => 'admin',
-        //         'email' => 'admin123@gmail.com',
-        //         'password' => 'admin123',
-        //         'role' => 'admin'
-
-        // foreach ($user as $key => $value){
-        //     User::create($value);
-        // }
+       user::create([
+        'username' => 'admin',
+        'email' => 'admin@gmail.com',
+        'password' => 'admin123',
+        'role' => 'admin'
+       ]);
+       user::create([
+        'username' => 'resan',
+        'email' => 'resansaputra2@gmail.com',
+        'password' => '157751',
+        'role' => 'user'
+       ]);
     }
 }

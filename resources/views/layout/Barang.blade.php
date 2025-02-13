@@ -53,6 +53,17 @@
             </div>
         </div>
     </nav>
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault(); // Mencegah penghapusan langsung sebelum konfirmasi
+            let confirmAction = confirm("Apakah Anda yakin ingin menghapus data ini?");
+            if (confirmAction) {
+                event.target.closest("form").submit(); // Melanjutkan penghapusan jika konfirmasi "OK"
+            } else {
+                alert("Penghapusan dibatalkan.");
+            }
+        }
+    </script>
     <div class="main bg-white w-10/12 ml-4 mt-3 h-[38rem] rounded-3xl    ">
         <div class="main-back">
             <div class="main-menu">
@@ -115,13 +126,9 @@
                 </div>
                 <div class="grafik-barang flex flex-wrap">
                     @forelse ($barang as $chart)
-                        <button
-                            class="m-2  bg-white border-2 border-black rounded-lg shadow-md shadow-black w-44 h-14">
-                            <p class="font-semibold text-xl text-left pl-2">{{ $chart->nama_barang }}:
-                                {{ $chart->stok }}</p>
+                        <button class="m-2  bg-white border-2 border-black rounded-lg shadow-md shadow-black w-44 h-14">
+                            <p class="font-semibold text-xl text-left pl-2">{{ $chart->nama_barang }}:{{ $chart->stok }}</p>
                         </button>
-
-
                     @empty
                     @endforelse
                 </div>
@@ -160,7 +167,7 @@
                                             class=" p-1 font-semibold"
                                             href="{{ route('barang.edit', $list->id_barang) }}">Update</a></button>
                                 </td>
-                                <form action="{{ route('barang.destroy', $list->id_barang) }}" method="post">
+                                <form action="{{ route('barang.destroy', $list->id_barang) }}" method="post" onsubmit="return confirmDelete(event)">
                                     @csrf
                                     @method('DELETE')
                                     <td class=" border-b-2 border-r-2 border-black h-9"><button

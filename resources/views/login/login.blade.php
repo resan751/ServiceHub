@@ -48,7 +48,7 @@
                             <p>lo</p>
                         </div> --}}
                     </div>
-                    @error('username')
+                    @error('password')
                         <div>{{ $message }}</div>
                     @enderror
                     <div class="login-txt pt-4 ml-96 text-white3 text-lg font-bold hover:text-white5 transition-colors duration-300 w-18">

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+Use App\Models\Service;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,6 +25,11 @@ class User extends Authenticatable
         'role',
         'password',
     ];
+
+    public function Service()
+    {
+        return $this->BelongsTo(Detail::class, 'id_user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
