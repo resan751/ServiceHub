@@ -8,16 +8,21 @@ use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
+    public function index(Request $request): View
+    {
+        $query = $request->input('search');
+        if ($query) {
+            $Barang = Barang::where('nama_barang', 'like', "%$query%")
+                ->orWhere('stok', 'like', "%$query%")
+                ->orderBy('id_barang', 'asc')
+                ->get();
+        } else {
+            $Barang = Barang::orderBy('id_barang', 'asc')->get();
+        }
+        $barang = Barang::select('nama_barang', 'stok')->get();
 
-  public function index(): view
-  {
-    $Barang = Barang::latest()->paginate(10);
-    $Barang = Barang::orderBy('id_barang', 'asc')->get();
-
-    $barang = Barang::select('nama_barang', 'stok')->get();
-
-    return view('layout.barang', compact('Barang', 'barang'));
-  }
+        return view('layout.barang', compact('Barang', 'barang', 'query'));
+    }
 
     public function create(): View
     {
@@ -71,5 +76,14 @@ class BarangController extends Controller
         $Barang = Barang::findOrFail($id_barang);
         $Barang->delete();
         return back();
+    }
+
+
+
+
+    public function getHarga($id)
+    {
+        $barang = Barang::findOrFail($id);
+        return response()->json(['harga_barang' => $barang->harga_barang]);
     }
 }

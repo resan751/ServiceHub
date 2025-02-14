@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 
 class JasaController extends Controller
 {
-    public function index(): view
-  {
-    $Jasa = Jasa::latest()->paginate(10);
-    $Jasa = Jasa::orderBy('id_jasa', 'asc')->get();
-
-    return view('layout.jasa', compact('Jasa'));
-  }
+    public function index(Request $request): View
+    {
+        $query = $request->input('search');
+        if ($query) {
+            $Jasa = jasa::where('nama_jasa', 'like', "%$query%")
+                ->orderBy('id_jasa', 'asc')
+                ->get();
+        } else {
+            $Jasa = jasa::orderBy('id_jasa', 'asc')->get();
+        }
+        return view('layout.jasa', compact('Jasa','query'));
+    }
 
   public function create(): View
   {
@@ -66,5 +71,11 @@ class JasaController extends Controller
         $Jasa->delete();
         return back();
     }
+
+  public function getHarga($id)
+  {
+    $jasa = Jasa::findOrFail($id);
+    return response()->json(['harga_jasa' => $jasa->harga_jasa]);
+  }
 
 }

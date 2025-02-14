@@ -6,6 +6,7 @@
     <title>register</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @vite('resources/css/app.css')
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -24,6 +25,20 @@
 </style>
 </head>
 <body class=" font-jakarta">
+    <script>
+        function togglePassword() {
+            let passwordField = document.getElementById("password");
+            let eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.replace('bx-show', 'bx-hide'); // Ganti ikon jadi mata tertutup
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.replace('bx-hide', 'bx-show'); // Ganti ikon jadi mata terbuka
+            }
+        }
+    </script>
     <div class="bg-black3 opacity-50 h-full w-3/6 absolute left-[680px]"></div>
     <form action="{{ route('register') }}" method="post">
         @csrf
@@ -44,7 +59,10 @@
                     </div>
                     <div class="register-input pt-10"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="text" placeholder="Username" name="username" id=""></div>
                     <div class="register-input pt-4"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="email" placeholder="email" name="email" id=""></div>
-                    <div class="register-input pt-4"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="password" placeholder="Password" name="password" id=""></div>
+                    <div class="register-input pt-4"><input class="w-full h-10 rounded-lg bg-white border-solid border-2 border-black" type="password" placeholder="Password" name="password" id="password"></div>
+                    <button class="text-black left-[33.5rem] text-2xl absolute top-[29.5rem]" type="button" onclick="togglePassword()">
+                        <i id="eyeIcon" class='bx bx-show'></i>
+                    </button>
                     <div class="register-btn">
                         <div class="btn w-full p-2 mt-20 bg-black4 text-white5 hover:text-black3 hover:bg-white5 transition-colors duration-500 rounded-lg text-center"><button class="w-full" type="submit"><i class='bx bx-log-in'></i>register</button></div>
                     </div>

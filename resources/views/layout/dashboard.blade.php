@@ -29,14 +29,14 @@
                 </div>
                 <div class="nav-menu text-white1">
                     <div class="nav-txt pt-9 "><button class="w-full h-12 rounded-md text-start border text-white">
-                            <p class="pl-3"><i class='bx bxs-user-rectangle'></i>User</p>
+                            <p class="pl-3"><i class='bx bxs-user'></i>User</p>
                         </button></div>
                     <div class="nav-txt "><button
                             class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="barang"
                                 class="pl-3 w-full h-full"><i class='bx bx-cart'></i>Barang</a></button></div>
                     <div class="nav-txt "><button
                             class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="jasa   "
-                                class="pl-3 w-full h-full"><i class='bx bx-smile'></i>Jasa</a></button></div>
+                                class="pl-3 w-full h-full"><i class='bx bxs-user-rectangle'></i>Jasa</a></button></div>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
                         <div class="nav-txt pt-80"><button
@@ -113,8 +113,7 @@
                             <th class="border-black border-t-2 border-b-2 w-96 text-start">nama</th>
                             <th class="border-black border-t-2 border-b-2 w-96 text-start">email</th>
                             <th class="border-black border-t-2 border-b-2 w-28 text-start">role</th>
-                            <th class="border-black border-t-2 border-b-2 border-r-2 text-start" colspan="2">
-                                action</th>
+                            <th class="border-black border-t-2 border-b-2 border-r-2 text-start">action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,17 +123,24 @@
                                 <td class=" border-b-2 border-black">{{ $list->username }}</td>
                                 <td class=" border-b-2 border-black">{{ $list->email }}</td>
                                 <td class=" border-b-2 border-black">{{ $list->role }}</td>
-                                <td class=" border-b-2 border-black h-9">
-                                <button class="  bg-amber-500 hover:bg-amber-600 p-1 rounded transition transform hover:scale-95">
-                                    <a class=" p-1 font-semibold" href="{{ route('dashboard.edit', $list->id_user) }}">Update</a></button>
+                                <td class="border-b-2 border-black flex border-r-2 ">
+                                    <button
+                                        class="bg-white5 border-2 m-1 text-2xl border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white5 transition-colors duration-500 rounded ">
+                                        <a class="p-1 font-semibold"
+                                            href="{{ route('dashboard.edit', $list->id_user) }}"><i class='bx bxs-edit-alt'></i></a>
+                                    </button>
+
+                                    <form action="{{ route('dashboard.destroy', $list->id_user) }}" method="post"
+                                        onsubmit="return confirmDelete(event)">
+                                        @csrf
+                                        @method('DELETE')
+                                            <button
+                                                class="bg-white5 border-2 m-1 text-2xl border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 p-1 rounded "
+                                                type="submit">
+                                                <i class='bx bx-trash'></i>
+                                            </button>
+                                    </form>
                                 </td>
-                                <form action="{{ route('dashboard.destroy', $list->id_user) }}" method="post" onsubmit="return confirmDelete(event)">
-                                    @csrf
-                                    @method('DELETE')
-                                    <td class=" border-b-2 border-r-2 border-black h-9"><button
-                                            class=" bg-red-600 hover:bg-red-700 p-1 rounded transition transform hover:scale-95"
-                                            type="submit">Delete</button></td>
-                                </form>
                             </tr>
                         @empty
                         @endforelse

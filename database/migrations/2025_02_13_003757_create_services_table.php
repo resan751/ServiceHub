@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('details', function (Blueprint $table) {
-            $table->id('id_detail');
-            $table->integer('id_barang');
-            $table->integer('harga_barang');
-            $table->integer('jumlah');
-            $table->integer('id_jasa');
-            $table->integer('harga_jasa');
+        Schema::create('services', function (Blueprint $table) {
+            $table->id('id_service');
+            $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
+            $table->date('tanggal');
+            $table->decimal('total_harga', 12, 2);
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('details');
+        Schema::dropIfExists('services');
     }
 };

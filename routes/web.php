@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
     route::get('list/back', [ListController::class, 'back'])->name('list.back');
 
     // detail
-    Route:: resource('detail', ServiceController::class,)->only(['index', 'create']);
+    Route::resource('detail', ServiceController::class)->only(['index', 'create', 'store']);
 
 
     // admin
@@ -45,4 +45,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('adjasa', function () { return view('form.adjasa'); });
     Route::get('jasa/{id_jasa}/edit', [JasaController::class, 'edit'])->name('jasa.edit');
     route::delete('jasa/{id_jasa}', [BarangController::class, 'destroy'])->name('destroy');
+
+    // API routes untuk harga
+    Route::get('/api/barang/{id}/harga', [BarangController::class, 'getHarga']);
+    Route::get('/api/jasa/{id}/harga', [JasaController::class, 'getHarga']);
 });

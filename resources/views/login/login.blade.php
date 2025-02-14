@@ -23,6 +23,21 @@
 </head>
 
 <body class=" font-jakarta">
+    <script>
+        function togglePassword() {
+            let passwordField = document.getElementById("password");
+            let eyeIcon = document.getElementById("eyeIcon");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.replace('bx-show', 'bx-hide'); // Ganti ikon jadi mata tertutup
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.replace('bx-hide', 'bx-show'); // Ganti ikon jadi mata terbuka
+            }
+        }
+    </script>
+
     <div class="bg-black3 opacity-50 h-full w-3/6 absolute left-[680px]"></div>
     <form action="{{ route('login.aunthenticate') }}" method="post">
         @csrf
@@ -43,10 +58,10 @@
                     @enderror
                     <div class="login-input pt-4 relative flex items-center justify-center">
                         <input class="pw w-full h-10 rounded-lg bg-white border-solid border-2 border-black"
-                            type="password" placeholder="Password" name="password" id="" required>
-                        {{-- <div class="eye cursor-pointer absolute flex items-center justify-center right-[10px]">
-                            <p>lo</p>
-                        </div> --}}
+                            type="password" placeholder="Password" name="password" id="password" required>
+                        <button class="text-black3 left-[26.5rem] text-2xl absolute top-18 " type="button" onclick="togglePassword()">
+                            <i id="eyeIcon" class='bx bx-show'></i>
+                        </button>
                     </div>
                     @error('password')
                         <div>{{ $message }}</div>
