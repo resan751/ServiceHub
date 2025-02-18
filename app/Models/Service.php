@@ -1,17 +1,25 @@
 <?php
 
 namespace App\Models;
-Use App\Models\User;
+
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Service extends Model
 {
+    use HasFactory;
+
     protected $primaryKey = 'id_service';
 
     protected $fillable = [
         'id_user',
         'tanggal',
-        'total_harga'
+        'total_harga',
+        'keluhan',
+        'dibayar',
+        'kembalian',
     ];
 
     public function details()
@@ -19,8 +27,8 @@ class Service extends Model
         return $this->hasMany(Detail::class, 'id_service');
     }
 
-    public function user()
+    public function services()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasMany(Service::class, 'id_user', 'id_user');
     }
 }

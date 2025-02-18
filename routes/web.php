@@ -23,9 +23,8 @@ Route::middleware(['auth'])->group(function () {
     route::get('home', [HomeController::class, 'index'])->name('home.index');
     route::get('list', [ListController::class, 'index'])->name('list.index');
     route::get('list/back', [ListController::class, 'back'])->name('list.back');
+    route::resource('data', ServiceController::class)->only('index', 'store');
 
-    // detail
-    Route::resource('detail', ServiceController::class)->only(['index', 'create', 'store']);
 
 
     // admin

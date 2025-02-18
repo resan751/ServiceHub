@@ -1,9 +1,1 @@
-action="{{ route('dashboard.update', $User->id_user) }}"
-
-type="text" placeholder="Username" name="username" value="{{ $User->username }}"
-
-type="text" placeholder="role" name="role" value="{{ $User->role }}"
-
-type="email" placeholder="email" name="email" value="{{ $User->email }}"
-
-type="password" placeholder="Password" name="password"
+php artisan migrate

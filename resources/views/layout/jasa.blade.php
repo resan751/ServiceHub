@@ -73,7 +73,7 @@
                     <button type="submit"
                         class="ml-2 bg-black3 text-white5 p-2 rounded-md h-7 hover:text-white absolute right-36 top-[39px] transition transform hover:scale-95"><i
                             class='bx bx-search-alt-2'></i></button>
-                    <a href="{{ route('barang.index') }}"
+                    <a href="{{ route('jasa.index') }}"
                         class="ml-2 w-24 h-10 text-center bg-black3 text-white5 border-2 border-black3 hover:bg-white5 hover:text-black3 transition-colors duration-500  p-2 rounded-md mr-3">
                         Reset
                     </a>
@@ -87,54 +87,55 @@
                         href="adjasa"><i class='bx bx-plus'></i></a></button>
             </div>
         </div>
-        <div class="tabel-head text-center mt-1 font-semibold">
+        <div class="tabel-head text-center font-semibold text-lg">
             <h2>Tabel Jasa</h2>
         </div>
-        <div class="main-tabel flex justify-center">
-            <table class="w-[99%] table-fixed">
-                <thead>
-                    <tr>
-                        <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1">id jasa</th>
-                        <th class="border-black border-t-2 border-b-2 w-[31rem] text-start">nama jasa</th>
-                        <th class="border-black border-t-2 border-b-2 w-[28rem] text-start">harga jasa</th>
-                        <th class="border-black border-t-2 border-b-2 border-r-2 text-start">action
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($Jasa as $list)
+        <div class="main-tabel">
+            <div class="">
+                <table class="w-[95%] ml-7 border-collapse">
+                    <thead>
                         <tr>
-                            <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_jasa }}</td>
-                            <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
-                            <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_jasa, 0, ',', '.') }}</td>
-                            <td class="border-b-2 border-black flex border-r-2 ">
-                                <button
-                                    class="bg-white5 border-2 m-1 text-2xl border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white5 transition-colors duration-500 rounded ">
-                                    <a class="p-1 font-semibold"
-                                        href="{{ route('jasa.edit', $list->id_jasa) }}"><i class='bx bxs-edit-alt'></i></a>
-                                </button>
-
-                                <form action="{{ route('jasa.destroy', $list->id_jasa) }}" method="post"
-                                    onsubmit="return confirmDelete(event)">
-                                    @csrf
-                                    @method('DELETE')
-                                        <button
-                                            class="bg-white5 border-2 m-1 text-2xl border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 p-1 rounded "
-                                            type="submit">
-                                            <i class='bx bx-trash'></i>
-                                        </button>
-                                </form>
-                            </td>
+                            <th class="border-y-2 border-l-2 border-black text-start pl-2 w-20">ID Jasa</th>
+                            <th class="border-y-2 border-black text-start pl-2">Nama Jasa</th>
+                            <th class="border-y-2 border-black text-start pl-2">Harga Jasa</th>
+                            <th class="border-y-2 border-r-2 border-black text-start pl-2">Action</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="  text-center p-4">
-                                Barang tidak ditemukan
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @forelse ($Jasa as $list)
+                            <tr>
+                                <td class="border-y-2 border-l-2 border-black pl-2">{{ $list->id_jasa }}</td>
+                                <td class="border-y-2 border-black pl-2">{{ $list->nama_jasa }}</td>
+                                <td class="border-y-2 border-black pl-2">Rp{{ number_format($list->harga_jasa, 0, ',', '.') }}</td>
+                                <td class="border-y-2 border-r-2 border-black p-2">
+                                    <div class="flex gap-2">
+                                        <a href="{{ route('jasa.edit', $list->id_jasa) }}"
+                                            class="bg-white5 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                            <i class='bx bxs-edit-alt text-xl'></i>
+                                        </a>
+                                        <form action="{{ route('jasa.destroy', $list->id_jasa) }}"
+                                            method="post"
+                                            onsubmit="return confirmDelete(event)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-white5 border-2 border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                                <i class='bx bx-trash text-xl'></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="border-y-2 border-black text-center p-4">
+                                    Jasa tidak ditemukan
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

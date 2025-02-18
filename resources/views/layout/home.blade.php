@@ -76,9 +76,9 @@
             </div>
         </div>
     </nav>
-    <div class="button absolute top-72 left-[31rem]">
-        <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="{{ route('detail.index') }}"><i class='bx bxs-data'></i>pendataan</a></button>
-        <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="list"><i class='bx bxs-data'></i>list data </a></button>
+    <div class="button absolute top-72 left-[30rem]">
+        <button class="bg-black3 w-80 font-semibold text-xl text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="{{ route('data.index') }}"><i class='bx bxs-data'></i>pendataan</a></button>
+        {{-- <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="list"><i class='bx bxs-data'></i>list data </a></button> --}}
     </div>
     <div class="main bg-white7 w-full h-[291px] mt-[285px]">
         <div class="main-back">

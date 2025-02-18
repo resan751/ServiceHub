@@ -24,7 +24,7 @@
 </head>
 <body class=" font-jakarta flex">
     <div class="back w-20 ">
-        <button class="text-white2 bg-black p-1 text-center mt-1 ml-1 rounded-md hover:scale-95 hover:text-white">
+        <button class="text-white5 bg-black4 p-1 text-center mt-1 ml-1 rounded-md  hover:text-black3 hover:bg-white5 transition-colors duration-500">
             <i class='bx bx-left-arrow-alt'></i>
             <a href="jasa">back</a>
         </button>
@@ -43,7 +43,7 @@
                 <div class="main-input mb-5"><input type="text" class="w-5/6 h-8 p-1 rounded-lg" name="nama_jasa" placeholder="nama jasa" id=""></div>
                 <div class="main-input mb-5"><input type="number" class="w-5/6 h-8 p-1 rounded-lg" name="harga_jasa" placeholder="harga jasa" id=""></div>
                 <div class="main-btn">
-                    <button type="submit" class="mt-60 bg-white w-5/6 h-8 rounded-md hover:border-2 hover:border-black hover:bg-white2"><i class='bx bx-plus'></i>tambah</button>
+                    <button type="submit" class="mt-60 bg-black4 text-white5 w-5/6 h-8 rounded-md hover:border-2 hover:text-black3 hover:bg-white5 transition-colors duration-500"><i class='bx bx-plus'></i>tambah</button>
                 </div>
             </div>
         </form>

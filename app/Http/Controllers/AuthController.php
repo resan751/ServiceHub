@@ -52,7 +52,7 @@ class AuthController extends Controller
     //crud
     public function index(): view
     {
-        $User = User::latest()->paginate(5);
+        $User = User::all();
         $User = User::orderBy('id_user', 'asc')->get();
 
         $adminCount = User::where('role', 'admin')->count();
@@ -69,10 +69,10 @@ class AuthController extends Controller
     public function update(Request $request, $id_user): RedirectResponse
     {
         $request->validate([
-            'username' => 'required|min:5',
-            'role' => 'required|min:5',
-            'email' => 'required|min:5',
-            'password' => 'required|min:5'
+            'username' => 'required|min:1',
+            'role' => 'required|min:1',
+            'email' => 'required|min:1',
+            'password' => 'required|min:1'
         ]);
 
         $User = User::findOrFail($id_user);

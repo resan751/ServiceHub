@@ -23,6 +23,6 @@ class ListController extends Controller
 
     public function back()
     {
-        return redirect()->back();
+        return redirect("data");
     }
 }

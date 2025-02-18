@@ -41,16 +41,18 @@
                     <div class="nav-txt flex items-center relative">
                         <div class="nav-txt px-1 font-medium text-lg flex items-center cursor-pointer text-white5"
                             id="userDropdown">
-                            <p>username</p>
+                            <p>{{ Auth::user()->username }}</p>
                             <i class='bx bx-chevron-down'></i>
                         </div>
                         <div id="dropdownMenu"
                             class="hidden absolute right-0 top-7 shadow-lg rounded-lg w-32 transition-all duration-500">
                             <ul class="">
                                 <li class="">
-                                    <div class="btn mx-2"><button
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button
                                             class="bg-white py-1 px-5 rounded-md items-center border-2 border-orange-500 text-orange-500 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-500 w-full ">logout</button>
-                                    </div>
+                                    </form>
                                 </li>
                             </ul>
                             <script>
@@ -91,7 +93,8 @@
                     <table class="w-1/6 table-fixed">
                         <thead>
                             <tr>
-                                <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1">id barang</th>
+                                <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1">id barang
+                                </th>
                                 <th class="border-black border-t-2 border-b-2 w-36 text-start pl-2">nama</th>
                                 <th class="border-black border-t-2 border-b-2 w-36 text-start">harga</th>
                                 <th class="border-black border-t-2 border-b-2 border-r-2 w-28 text-start">stok</th>
@@ -102,7 +105,8 @@
                                 <tr>
                                     <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_barang }}</td>
                                     <td class=" border-b-2 pl-2 border-black">{{ $list->nama_barang }}</td>
-                                    <td class=" border-b-2 border-black">Rp{{ number_format($list->harga_barang, 0, ',', '.') }}</td>
+                                    <td class=" border-b-2 border-black">
+                                        Rp{{ number_format($list->harga_barang, 0, ',', '.') }}</td>
                                     <td class=" border-r-2 border-b-2 border-black">{{ $list->stok }}</td>
                                 </tr>
                             @empty
@@ -111,22 +115,24 @@
                     </table>
                     <table class="w-1/6 table-fixed">
                         <thead>
-                          <tr>
-                            <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1" >id jasa</th>
-                            <th class="border-black border-t-2 border-b-2 w-44 text-start">nama jasa</th>
-                            <th class="border-black border-t-2 border-r-2 border-b-2 w-32 text-start">harga jasa</th>
-                          </tr>
+                            <tr>
+                                <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1">id jasa
+                                </th>
+                                <th class="border-black border-t-2 border-b-2 w-44 text-start">nama jasa</th>
+                                <th class="border-black border-t-2 border-r-2 border-b-2 w-32 text-start">harga jasa
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
                             @forelse ($Jasa as $list)
-                            <tr>
-                                <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_jasa }}</td>
-                            <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
-                            <td class=" border-r-2 border-b-2 border-black">Rp{{ number_format($list->harga_jasa, 0, ',', '.' ) }}</td>
-                          </tr>
-                          @empty
-
-                        @endforelse
+                                <tr>
+                                    <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_jasa }}</td>
+                                    <td class=" border-b-2 border-black">{{ $list->nama_jasa }}</td>
+                                    <td class=" border-r-2 border-b-2 border-black">
+                                        Rp{{ number_format($list->harga_jasa, 0, ',', '.') }}</td>
+                                </tr>
+                            @empty
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

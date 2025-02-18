@@ -101,51 +101,57 @@
                     </p>
                 </div>
             </div>
-            <div class="tabel-head text-center mt-10 font-semibold">
+            <div class="tabel-head text-center mt-10 font-semibold text-lg">
                 <h2>Tabel user</h2>
             </div>
-            <div class="main-tabel flex justify-center">
-                <table class="w-[99%] table-fixed">
-                    <thead>
-                        <tr>
-                            <th class="border-black border-l-2 border-t-2 border-b-2 w-20 text-start pl-1">id user
-                            </th>
-                            <th class="border-black border-t-2 border-b-2 w-96 text-start">nama</th>
-                            <th class="border-black border-t-2 border-b-2 w-96 text-start">email</th>
-                            <th class="border-black border-t-2 border-b-2 w-28 text-start">role</th>
-                            <th class="border-black border-t-2 border-b-2 border-r-2 text-start">action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($User as $list)
+            <div class="main-tabel">
+                <div class="overflow-y-auto scrollbar-hide h-52">
+                    <table class="w-[95%] ml-7 border-collapse">
+                        <thead>
                             <tr>
-                                <td class=" border-l-2 border-b-2 border-black pl-1 ">{{ $list->id_user }}</td>
-                                <td class=" border-b-2 border-black">{{ $list->username }}</td>
-                                <td class=" border-b-2 border-black">{{ $list->email }}</td>
-                                <td class=" border-b-2 border-black">{{ $list->role }}</td>
-                                <td class="border-b-2 border-black flex border-r-2 ">
-                                    <button
-                                        class="bg-white5 border-2 m-1 text-2xl border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white5 transition-colors duration-500 rounded ">
-                                        <a class="p-1 font-semibold"
-                                            href="{{ route('dashboard.edit', $list->id_user) }}"><i class='bx bxs-edit-alt'></i></a>
-                                    </button>
-
-                                    <form action="{{ route('dashboard.destroy', $list->id_user) }}" method="post"
-                                        onsubmit="return confirmDelete(event)">
-                                        @csrf
-                                        @method('DELETE')
-                                            <button
-                                                class="bg-white5 border-2 m-1 text-2xl border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 p-1 rounded "
-                                                type="submit">
-                                                <i class='bx bx-trash'></i>
-                                            </button>
-                                    </form>
-                                </td>
+                                <th class="border-y-2 border-l-2 border-black text-start pl-2 w-20">ID User</th>
+                                <th class="border-y-2 border-black text-start pl-2">Nama</th>
+                                <th class="border-y-2 border-black text-start pl-2">Email</th>
+                                <th class="border-y-2 border-black text-start pl-2 w-28">Role</th>
+                                <th class="border-y-2 border-r-2 border-black text-start pl-2">Action</th>
                             </tr>
-                        @empty
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse ($User as $list)
+                                <tr>
+                                    <td class="border-y-2 border-l-2 border-black pl-2">{{ $list->id_user }}</td>
+                                    <td class="border-y-2 border-black pl-2">{{ $list->username }}</td>
+                                    <td class="border-y-2 border-black pl-2">{{ $list->email }}</td>
+                                    <td class="border-y-2 border-black pl-2">{{ $list->role }}</td>
+                                    <td class="border-y-2 border-r-2 border-black p-2">
+                                        <div class="flex gap-2">
+                                            <a href="{{ route('dashboard.edit', $list->id_user) }}"
+                                                class="bg-white5 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                                <i class='bx bxs-edit-alt text-xl'></i>
+                                            </a>
+                                            <form action="{{ route('dashboard.destroy', $list->id_user) }}"
+                                                method="post"
+                                                onsubmit="return confirmDelete(event)">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="bg-white5 border-2 border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                                    <i class='bx bx-trash text-xl'></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="border-y-2 border-black text-center p-4">
+                                        User tidak ditemukan
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

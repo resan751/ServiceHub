@@ -16,30 +16,53 @@
             }
         </style>
 </head>
-<body class=" font-jakarta bg-black3 justify-center">
+<body class="font-jakarta bg-black3">
     <div class="back absolute mt-1 ml-1 ">
-        <button class="text-white2 bg-black p-1 text-center mt-1 ml-1 rounded-md hover:scale-95 hover:text-white">
+        <button class="text-white5 bg-black4 p-1 text-center mt-1 ml-1 rounded-md hover:text-black3 hover:bg-white5 transition-colors duration-500">
             <i class='bx bx-left-arrow-alt'></i>
             <a href="{{ route('jasa.index') }}">back</a>
-    </button>
-</div>
+        </button>
+    </div>
     <div class="flex justify-center">
-    <div class="main bg-black1 w-2/6 h-96 mt-24 rounded-3xl justify-center flex  ">
-        <div class="main-back w-11/12">
-            <div class="main-head p-3 pb-5 text-2xl font-semibold text-center text-white">
-                <h1>UPDATE JASA</h1>
-            </div>
-            <form action="{{ route('jasa.update', $Jasa->id_jasa) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="main-menu">
-                    <div class="main-input mt-3"><input type="text"  name="nama_jasa" placeholder="nama jasa" class="w-full h-9 rounded-lg" value="{{ $Jasa->nama_jasa }}" id=""></div>
-                    <div class="main-input mt-5"><input type="number" name="harga_jasa" placeholder="harga jasa" class="w-full h-9 rounded-lg" value="{{ $Jasa->harga_jasa }}" id=""></div>
-                    <div class="main-btn w-full h-10 p-2 mt-28 bg-black2 text-white2 hover:text-white hover:bg-black rounded-lg text-center"><button class="w-full" type="submit">Update</button></div>
+        <div class="main bg-black4 w-3/6 h-[34rem] mt-16 rounded-3xl justify-center flex pb-8">
+            <div class="main-back w-11/12">
+                <div class="main-head p-3 pb-5 text-4xl font-semibold text-center text-white">
+                    <h1>UPDATE JASA</h1>
                 </div>
-            </form>
+                <div class="icon text-center text-white5 font-bold">
+                    <i class='bx bxs-edit-alt text-9xl'></i>
+                </div>
+                <form action="{{ route('jasa.update', $Jasa->id_jasa) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="main-menu">
+                        <div class="main-input mt-3">
+                            <input type="text"
+                                name="nama_jasa"
+                                placeholder="nama jasa"
+                                class="w-full h-9 rounded-lg @error('nama_jasa') border-red-500 @enderror"
+                                value="{{ old('nama_jasa', $Jasa->nama_jasa) }}">
+                            @error('nama_jasa')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="main-input mt-5">
+                            <input type="number"
+                                name="harga_jasa"
+                                placeholder="harga jasa"
+                                class="w-full h-9 rounded-lg @error('harga_jasa') border-red-500 @enderror"
+                                value="{{ old('harga_jasa', $Jasa->harga_jasa) }}">
+                            @error('harga_jasa')
+                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div class="main-btn w-full h-10 p-2 mt-44 bg-black3 text-white5 hover:text-black3 hover:bg-white5 rounded-lg text-center transition-colors duration-500">
+                            <button class="w-full" type="submit">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>
