@@ -48,7 +48,7 @@
                 <form action="{{ route('logout') }}" method="post" class="nav-txt pt-80">
                     @csrf
                     <button type="submit" class="w-full h-14 rounded-md text-start border border-white3 hover:border-white hover:text-white transition transform hover:scale-95">
-                        <p class="pl-12 pt-3 font-semibold text-xl">
+                        <p class="pl-12 font-semibold text-xl">
                             <i class='bx bx-exit'></i>Logout
                         </p>
                     </button>

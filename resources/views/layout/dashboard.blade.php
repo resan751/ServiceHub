@@ -17,6 +17,10 @@
             margin: 0;
             padding: 0;
         }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 

@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
     route::get('list', [ListController::class, 'index'])->name('list.index');
     route::get('list/back', [ListController::class, 'back'])->name('list.back');
     route::resource('data', ServiceController::class)->only('index', 'store');
+    Route::get('pendataan', [ServiceController::class, 'data'])->name('pendataan');
+    Route::delete('data/{id}', [ServiceController::class, 'destroy'])->name('data.destroy');
+
 
 
 

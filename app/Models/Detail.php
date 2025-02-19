@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Detail extends Model
 {
     protected $primaryKey = 'id_detail';
+    protected $table = 'details';
 
     use HasFactory;
 
@@ -16,6 +17,16 @@ class Detail extends Model
 
     public function service()
     {
-        return $this->belongsTo(Service::class, 'id_service');
+        return $this->belongsTo(Service::class, 'id_service', 'id_service');
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
+    }
+
+    public function jasa()
+    {
+        return $this->belongsTo(Jasa::class, 'id_jasa', 'id_jasa');
     }
 }

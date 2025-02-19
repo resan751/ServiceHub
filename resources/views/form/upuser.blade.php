@@ -51,11 +51,11 @@
                         </div>
 
                         <div class="main-input mt-5">
-                            <input type="text"
-                                placeholder="Role"
-                                name="role"
-                                value="{{ old('role', $User->role) }}"
-                                class="w-full h-9 rounded-lg @error('role') border-red-500 @enderror">
+                            <select name="role" class="w-full h-9 rounded-lg @error('role') border-red-500 @enderror">
+                                <option value="">Pilih Role</option>
+                                <option value="admin" {{ old('role', $User->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="user" {{ old('role', $User->role) == 'user' ? 'selected' : '' }}>User</option>
+                            </select>
                             @error('role')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror

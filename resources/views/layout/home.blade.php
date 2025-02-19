@@ -40,7 +40,7 @@
                         <div class="nav-txt px-1 font-medium text-lg flex items-center cursor-pointer text-white5"
                             id="userDropdown">
                             @auth
-                            <p>{{ Auth::user()->username}}</p>
+                                <p>{{ Auth::user()->username }}</p>
                             @endauth
                             <i class='bx bx-chevron-down'></i>
                         </div>
@@ -51,7 +51,8 @@
                                     <div class="btn mx-2">
                                         <form action="{{ route('logout') }}" method="post">
                                             @csrf
-                                            <button class="bg-white py-1 px-5 rounded-md items-center border-2 border-orange-500 text-orange-500 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-500 w-full ">logout</button>
+                                            <button
+                                                class="bg-white py-1 px-5 rounded-md items-center border-2 border-orange-500 text-orange-500 hover:bg-red-600 hover:text-white hover:border-red-600 transition-colors duration-500 w-full ">logout</button>
                                         </form>
                                     </div>
                                 </li>
@@ -77,16 +78,93 @@
         </div>
     </nav>
     <div class="button absolute top-72 left-[30rem]">
-        <button class="bg-black3 w-80 font-semibold text-xl text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="{{ route('data.index') }}"><i class='bx bxs-data'></i>pendataan</a></button>
-        {{-- <button class="bg-black3 text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a href="list"><i class='bx bxs-data'></i>list data </a></button> --}}
+        <button
+            class="bg-black3 w-80 font-semibold text-xl text-white5 px-5 py-2 rounded-md mx-2 hover:bg-white5 hover:text-black3 transition-colors duration-500"><a
+                href="{{ route('pendataan') }}"><i class='bx bxs-data'></i>pendataan</a></button>
     </div>
-    <div class="main bg-white7 w-full h-[291px] mt-[285px]">
+    <div class="main bg-white7 w-full h-auto top-[21rem] absolute text-white5">
         <div class="main-back">
             <div class="main-menu">
-                popop
+                <div class="flex flex-wrap">
+                    @forelse ($services as $item)
+                        <div class="main-tran bg-black3 w-96 h-auto m-3 rounded-xl">
+                            <div class=" font-semibold text-xl text-center w-full h-8 p-1 items-center">
+                                <h2>data transaksi</h2>
+                            </div>
+                            <div class="main-txt font-semibold px-3 ">
+                                <p>ID service: {{ $item->id_service }}</p>
+                                <p>Petugas: {{ $item->user->username }}</p>
+                                <p>tanggal: {{ $item->tanggal }}</p>
+                                <p>keluhan: {{ $item->keluhan }}</p>
+                            </div>
+
+                            <div class="head w-full text-center font-semibold text-xl pb-2">
+                                <p>DETAIL</p>
+                            </div>
+                            <hr class="w-full text-white pb-2">
+                            @forelse ($item->details as $detail)
+                                <div class="detail w-full font-semibold">
+                                    @if ($detail->id_barang)
+                                        <div class="barang flex justify-between px-3">
+                                            <p>Barang: {{ $detail->barang->nama_barang }}</p>
+                                            <p>Rp{{ number_format($detail->harga_satuan,  0, ',', '.') }}</p>
+                                        </div>
+                                    @elseif ($detail->id_jasa)
+                                        <div class="jasa flex justify-between px-3">
+                                            <p>Jasa: {{ $detail->jasa->nama_jasa }} </p>
+                                            <p>Rp{{number_format($detail->harga_satuan,  0, ',', '.') }}</p>
+                                        </div>
+                                    @endif
+                                </div>
+                            @empty
+                                <p>Tidak ada detail</p>
+                            @endforelse
+                            <hr class="w-full text-white pb-2 pt-2">
+                            <div class="transaksi w-full px-3 font-semibold">
+                                <div class="total flex justify-between">
+                                    <p>total:</p>
+                                    <p>Rp{{number_format($item->total_harga,  0, ',', '.') }}</p>
+
+                                </div>
+                                <div class="bayar flex justify-between">
+                                    <p>bayar:</p>
+                                    <p>Rp{{number_format($item->dibayar,  0, ',', '.') }}</p>
+
+                                </div>
+                                <div class="kembalian flex justify-between pb-2">
+                                    <p>kembalian:</p>
+                                    <p>Rp{{ number_format($item->kembalian,  0, ',', '.') }}</p>
+                                </div>
+                            </div>
+                            <hr class="w-full text-white">
+                            <form action="{{ route('data.destroy', $item->id_service) }}" method="post"
+                                onsubmit="return confirmDelete(event)">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                class="bg-white5 border-2 m-2 ml-[21rem]  border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                <i class='bx bx-trash text-xl '></i>
+                            </button>
+                        </form>
+                        <hr class="w-full text-white">
+                        <h1 class="text-center font-bold text-3xl py-2">ServiceHub</h1>
+                        </div>
+                    @empty
+                        <p>Tidak ada service</p>
+                    @endforelse
+                </div>
             </div>
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function confirmDelete(event) {
+        event.preventDefault();
+        if (confirm("Apakah Anda yakin ingin menghapus data ini?")) {
+            event.target.closest("form").submit();
+        }
+    }
+</script>
 
 </html>

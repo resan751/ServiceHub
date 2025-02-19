@@ -31,7 +31,7 @@ class AuthServices
             if ($User->role === 'admin') {
                 return redirect()->route('dashboard.index');
             } else {
-                return redirect()->route('home.index');
+                return redirect()->route('data.index');
             }
         } else {
             return back();

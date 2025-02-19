@@ -12,6 +12,7 @@ class Service extends Model
     use HasFactory;
 
     protected $primaryKey = 'id_service';
+    protected $table = 'services';
 
     protected $fillable = [
         'id_user',
@@ -24,11 +25,11 @@ class Service extends Model
 
     public function details()
     {
-        return $this->hasMany(Detail::class, 'id_service');
+        return $this->hasMany(Detail::class, 'id_service', 'id_service');
     }
 
-    public function services()
+    public function user()
     {
-        return $this->hasMany(Service::class, 'id_user', 'id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 }
