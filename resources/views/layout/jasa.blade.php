@@ -17,6 +17,9 @@
             margin: 0;
             padding: 0;
         }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
@@ -91,7 +94,7 @@
             <h2>Tabel Jasa</h2>
         </div>
         <div class="main-tabel">
-            <div class="">
+            <div class="overflow-y-auto scrollbar-hide h-[27rem]">
                 <table class="w-[95%] ml-7 border-collapse">
                     <thead>
                         <tr>

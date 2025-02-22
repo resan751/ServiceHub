@@ -32,19 +32,18 @@ class ServiceController extends Controller
             'keluhan' => 'nullable|string',
             'dibayar' => 'required|numeric|min:0',
             'kembalian' => 'required|numeric|min:0',
+            'total_harga_semua' => 'required|numeric|min:0',
             'barang.*.id_barang' => 'nullable|exists:barangs,id_barang',
             'barang.*.harga' => 'nullable|numeric|min:0',
             'jasa.*.id_jasa' => 'nullable|exists:jasas,id_jasa',
             'jasa.*.harga' => 'nullable|numeric|min:0',
         ]);
 
-        $total_harga = 0;
-
         $service = Service::create([
             'id_user' => Auth::id(),
             'tanggal' => now(),
             'keluhan' => $request->keluhan,
-            'total_harga' => 0,
+            'total_harga' => $request->total_harga_semua,
             'dibayar' => $request->dibayar,
             'kembalian' => $request->kembalian,
         ]);
@@ -52,15 +51,12 @@ class ServiceController extends Controller
         if ($request->has('barang')) {
             foreach ($request->barang as $barang) {
                 if (!empty($barang['id_barang']) && isset($barang['harga'])) {
-                    $hargaBarang = (int) $barang['harga'];
-                    $total_harga += $hargaBarang;
-
                     Detail::create([
                         'id_service' => $service->id_service,
                         'id_barang' => $barang['id_barang'],
                         'id_jasa' => null,
-                        'harga_satuan' => $hargaBarang,
-                        'total_harga' => $hargaBarang,
+                        'harga_satuan' => $barang['harga'],
+                        'total_harga' => $barang['harga'],
                     ]);
                 }
             }
@@ -69,23 +65,16 @@ class ServiceController extends Controller
         if ($request->has('jasa')) {
             foreach ($request->jasa as $jasa) {
                 if (!empty($jasa['id_jasa']) && isset($jasa['harga'])) {
-                    $hargaJasa = (int) $jasa['harga'];
-                    $total_harga += $hargaJasa;
-
                     Detail::create([
                         'id_service' => $service->id_service,
                         'id_barang' => null,
                         'id_jasa' => $jasa['id_jasa'],
-                        'harga_satuan' => $hargaJasa,
-                        'total_harga' => $hargaJasa,
+                        'harga_satuan' => $jasa['harga'],
+                        'total_harga' => $jasa['harga'],
                     ]);
                 }
             }
         }
-
-        $service->update([
-            'total_harga' => $total_harga,
-        ]);
 
         return redirect()->route('data.index')->with('success', 'Transaksi berhasil ditambahkan');
     }

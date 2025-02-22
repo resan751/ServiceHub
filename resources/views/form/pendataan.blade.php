@@ -16,20 +16,20 @@
             margin: 0;
             padding: 0;
 
-            body {
-                background-image: url('image/msm.jpeg');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-            }
+        }
 
+        body {
+            background-image: url('image/msm.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
     </style>
 </head>
 
 <body class=" font-jakarta">
-    <div class="absolute w-full h-[170%] top-14 bg-black4 opacity-50">
+    <div class="absolute w-full h-[170%] top-[68px] bg-black4 opacity-40">
     </div>
     <nav>
         <div class="nav bg-black3 p-3 w-full">
@@ -40,7 +40,8 @@
                     </div>
                     <div class="nav-txt flex items-center relative">
                         <div class="nav-txt font-medium text-lg flex items-center text-white5 mr-5 ">
-                            <a href="list"><i class='bx bxs-data'></i>list data</a>
+                            <button class="bg-black3 p-2 rounded-lg" id="hargaBtn"><i class='bx bxs-data'></i>list
+                                data</button>
                         </div>
                         <div class="nav-txt px-1 font-medium text-lg flex items-center cursor-pointer text-white5"
                             id="userDropdown">
@@ -94,7 +95,8 @@
                     @csrf
 
                     <div class="keluhan ml-2 my-1">
-                        <input type="text" class="w-[98%] rounded-lg h-7" name="keluhan" id="" placeholder="keluhan">
+                        <input type="text" class="w-[98%] rounded-lg h-7" name="keluhan" id=""
+                            placeholder="keluhan">
                     </div>
 
 
@@ -105,19 +107,23 @@
                     <div class="flex flex-wrap bg-black4 w-[98%] ml-2 rounded-lg p-1 h-auto">
                         @foreach ($Barang as $item)
                             <div class="main-input p-2">
-                                <div class="input flex bg-black3 items-center text-white5 w-72 p-2 rounded-lg transition transform hover:scale-95">
+                                <div
+                                    class="input flex bg-black3 items-center text-white5 w-72 p-2 rounded-lg transition transform hover:scale-95">
                                     <label class="flex w-40">
-                                        <input type="checkbox" name="barang[{{ $item->id_barang }}][id_barang]" value="{{ $item->id_barang }}" class="mr-2">
+                                        <input type="checkbox" name="barang[{{ $item->id_barang }}][id_barang]"
+                                            value="{{ $item->id_barang }}" class="mr-2">
                                         {{ $item->nama_barang }} ({{ $item->stok }})
                                     </label>
-                                    <input type="number" name="barang[{{ $item->id_barang }}][harga]" placeholder="Harga Satuan"
+                                    <input type="number" name="barang[{{ $item->id_barang }}][harga]"
+                                        placeholder="Harga Satuan"
                                         class="ml-2 mt-2 rounded-lg p-1 h-7 w-[30%] text-black bg-white">
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="total">
-                        <input type="number" name="total_harga_barang" placeholder="Total harga barang" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white">
+                        <input type="number" name="total_harga_barang" placeholder="Total harga barang"
+                            class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white">
                     </div>
 
                     <!-- Jasa -->
@@ -127,26 +133,30 @@
                     <div class="flex flex-wrap bg-black4 w-[98%] ml-2 rounded-lg p-1 h-auto">
                         @foreach ($Jasa as $item)
                             <div class="main-input p-2">
-                                <div class="input flex bg-black3 items-center text-white5 p-2 w-60 rounded-lg transition transform hover:scale-95">
+                                <div
+                                    class="input flex bg-black3 items-center text-white5 p-2 w-64 rounded-lg transition transform hover:scale-95">
                                     <label class="flex w-40">
-                                        <input type="checkbox" name="jasa[{{ $item->id_jasa }}][id_jasa]" value="{{ $item->id_jasa }}" class="mr-2">
+                                        <input type="checkbox" name="jasa[{{ $item->id_jasa }}][id_jasa]"
+                                            value="{{ $item->id_jasa }}" class="mr-2">
                                         {{ $item->nama_jasa }}
                                     </label>
-                                    <input type="number" name="jasa[{{ $item->id_jasa }}][harga]" placeholder="Harga Satuan"
-                                        class="ml-2 mt-2 rounded-lg p-1 h-7 w-[30%] text-black bg-white">
+                                    <input type="number" name="jasa[{{ $item->id_jasa }}][harga]"
+                                        placeholder="Harga Satuan"
+                                        class="ml-2 mt-2 rounded-lg p-1 h-7 w-[40%] text-black bg-white">
                                 </div>
                             </div>
                         @endforeach
                     </div>
                     <div class="total">
-                        <input type="number" name="total_harga_jasa" placeholder="Total harga jasa" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white">
+                        <input type="number" name="total_harga_jasa" placeholder="Total harga jasa"
+                            class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white">
                     </div>
                     <div class="total">
-                        <input type="number" name="total_harga_semua" placeholder="Total harga semuanya" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white">
+                        <input type="number" name="total_harga_semua" placeholder="Total harga semuanya" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[98%] text-black bg-white" readonly>
                     </div>
                     <div class="total flex">
                         <input type="number" name="dibayar" placeholder="dibayar" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[49%] text-black bg-white">
-                        <input type="number" name="kembalian" placeholder="kembalian" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[48%] text-black bg-white">
+                        <input type="number" name="kembalian" placeholder="kembalian" class="ml-2 mt-5 rounded-lg p-1 h-7 w-[48%] text-black bg-white" readonly>
                     </div>
 
                     <div class="main-btn mt-4 ml-3 mb-3">
@@ -160,6 +170,127 @@
             </div>
         </div>
     </div>
+
+    <div id="list" class="harga hidden bg-white5 absolute w-96 right-10 top-14 rounded-lg transition-all duration-500">
+        <div class="tabel-harga">
+            <span class="close ml-[22rem] text-3xl font-semibold"><button class=""><i class='bx bx-x'></i></button></span>
+            <h2 class="text-center font-semibold text-2xl">Daftar Harga</h2>
+            <table class=" table-fixed ml-12 my-2">
+                <thead>
+                    <tr>
+                        <th class="border-black border-t-2 border-b-2 border-l-2 w-36 text-start pl-2">barang</th>
+                        <th class="border-black border-t-2 border-b-2 border-r-2 w-36 text-start">harga</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($Barang as $list)
+                        <tr>
+                            <td class=" border-b-2 border-l-2 pl-2 border-black">{{ $list->nama_barang }}</td>
+                            <td class=" border-b-2 border-r-2 border-black">
+                                Rp{{ number_format($list->harga_barang, 0, ',', '.') }}</td>
+                        </tr>
+                    @empty
+                    @endforelse
+                </tbody>
+            </table>
+            <table class="table-fixed ml-10 my-2 ">
+                <thead>
+                    <tr>
+                        <th class="border-black border-t-2 border-l-2 border-b-2 w-44 pl-2 text-start">nama jasa</th>
+                        <th class="border-black border-t-2 border-r-2 border-b-2 w-32 text-start">harga jasa
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($Jasa as $list)
+                        <tr>
+                            <td class=" border-b-2 border-l-2 pl-2 border-black">{{ $list->nama_jasa }}</td>
+                            <td class=" border-b-2 border-r-2 border-black">
+                                Rp{{ number_format($list->harga_jasa, 0, ',', '.') }}</td>
+                        </tr>
+                    @empty
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const checkboxesBarang = document.querySelectorAll('input[type="checkbox"][name^="barang"]');
+        const checkboxesJasa = document.querySelectorAll('input[type="checkbox"][name^="jasa"]');
+        const totalHargaBarangInput = document.querySelector('input[name="total_harga_barang"]');
+        const totalHargaJasaInput = document.querySelector('input[name="total_harga_jasa"]');
+        const totalHargaSemuaInput = document.querySelector('input[name="total_harga_semua"]');
+        const dibayarInput = document.querySelector('input[name="dibayar"]');
+        const kembalianInput = document.querySelector('input[name="kembalian"]');
+
+        function hitungTotal(checkboxes) {
+            let total = 0;
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    const hargaInput = checkbox.closest('.input').querySelector('input[type="number"]');
+                    const harga = parseFloat(hargaInput.value) || 0;
+                    total += harga;
+                }
+            });
+            return total;
+        }
+
+        function updateTotal() {
+            const totalBarang = hitungTotal(checkboxesBarang);
+            const totalJasa = hitungTotal(checkboxesJasa);
+            const totalSemua = totalBarang + totalJasa;
+
+            totalHargaBarangInput.value = totalBarang;
+            totalHargaJasaInput.value = totalJasa;
+            totalHargaSemuaInput.value = totalSemua;
+
+            updateKembalian();
+        }
+
+        function updateKembalian() {
+            const totalSemua = parseFloat(totalHargaSemuaInput.value) || 0;
+            const dibayar = parseFloat(dibayarInput.value) || 0;
+            kembalianInput.value = Math.max(0, dibayar - totalSemua);
+        }
+
+        // Event listeners untuk checkbox dan input harga
+        checkboxesBarang.forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotal);
+            const hargaInput = checkbox.closest('.input').querySelector('input[type="number"]');
+            if (hargaInput) {
+                hargaInput.addEventListener('input', updateTotal);
+            }
+        });
+
+        checkboxesJasa.forEach(checkbox => {
+            checkbox.addEventListener('change', updateTotal);
+            const hargaInput = checkbox.closest('.input').querySelector('input[type="number"]');
+            if (hargaInput) {
+                hargaInput.addEventListener('input', updateTotal);
+            }
+        });
+
+        // Event listener untuk input dibayar
+        dibayarInput.addEventListener('input', updateKembalian);
+
+        // Panggil updateTotal saat halaman dimuat untuk menginisialisasi nilai
+        updateTotal();
+    });
+    const hargaBtn = document.getElementById('hargaBtn');
+    const list = document.getElementById('list');
+
+    hargaBtn.addEventListener('click', () => {
+        list.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!hargaBtn.contains(event.target)) {
+            list.classList.add('hidden');
+        }
+    });
+</script>
 
 </html>

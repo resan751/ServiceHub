@@ -21,14 +21,9 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     // layout
     route::get('home', [HomeController::class, 'index'])->name('home.index');
-    route::get('list', [ListController::class, 'index'])->name('list.index');
-    route::get('list/back', [ListController::class, 'back'])->name('list.back');
     route::resource('data', ServiceController::class)->only('index', 'store');
     Route::get('pendataan', [ServiceController::class, 'data'])->name('pendataan');
     Route::delete('data/{id}', [ServiceController::class, 'destroy'])->name('data.destroy');
-
-
-
 
     // admin
     // User

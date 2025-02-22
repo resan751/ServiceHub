@@ -87,9 +87,9 @@
             <div class="w-5/12">
                 <canvas id="pieChart" class="max-h-48"></canvas>
             </div>
-            <div class="flex-1 flex flex-wrap">
+            <div class="flex-1 flex flex-wrap overflow-y-auto scrollbar-hide h-52">
                 @forelse ($barang as $chart)
-                    <div class="m-2 bg-white border-2 border-black rounded-lg shadow-md shadow-black w-44 h-14 p-2">
+                    <div class="m-2 bg-white border-2 border-black rounded-lg shadow-md shadow-black w-48 h-14 p-2">
                         <p class="font-semibold text-xl">
                             {{ $chart->nama_barang }}: {{ $chart->stok }}
                         </p>
