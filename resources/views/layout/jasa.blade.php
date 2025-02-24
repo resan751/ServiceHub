@@ -31,18 +31,13 @@
                     <h1><i class='bx bxs-category'></i>ServiceHub</h1>
                 </div>
                 <div class="nav-menu text-white1">
-                    <div class="nav-txt pt-9 "><button
-                            class="w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="dashboard"
-                                class="pl-3"><i class='bx bxs-user'></i>User</a></button></div>
-                    <div class="nav-txt "><button
-                            class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="barang"
-                                class="pl-3 w-full h-full"><i class='bx bx-cart'></i>Barang</a></button></div>
-                    <div class="nav-txt "><button class=" w-full h-12 rounded-md text-start border text-white">
-                            <p class="pl-3 pt-2 w-full h-full"><i class='bx bxs-user-rectangle'></i>Jasa</p>
-                        </button></div>
+                    <div class="nav-txt pt-9 "><button class="w-full h-10 rounded-md text-start hover:border hover:text-white"><a href="dashboard" class="pl-3"><i class='bx bxs-user'></i>User</a></button></div>
+                    <div class="nav-txt "><button class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="barang" class="pl-3 w-full h-full"><i class='bx bx-cart'></i>Barang</a></button></div>
+                    <div class="nav-txt "><button class=" w-full h-12 rounded-md text-start border text-white "><p class="pl-3 w-full h-full"><i class='bx bxs-user-rectangle'></i>Jasa</p></button></div>
+                    <div class="nav-txt "><button class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="list" class="pl-3 w-full h-full"><i class='bx bxs-data'></i>List</a></button></div>
                     <form action="{{ route('logout') }}" method="post">
                         @csrf
-                        <div class="nav-txt pt-80"><button
+                        <div class="nav-txt pt-72"><button
                                 class=" w-full h-14 rounded-md text-start border border-white3 hover:border-white hover:text-white transition transform hover:scale-95">
                                 <p class=" pl-12 pt-3 font-semibold text-xl w-full h-full"><i
                                         class='bx bx-exit'></i>Logout</p>

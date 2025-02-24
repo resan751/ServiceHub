@@ -8,8 +8,8 @@ use App\Models\Barang;
 use App\Models\Jasa;
 use App\Models\Service;
 use App\Models\Servis;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {

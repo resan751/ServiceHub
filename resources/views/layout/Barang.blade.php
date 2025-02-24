@@ -30,28 +30,17 @@
                 <h1><i class='bx bxs-category'></i>ServiceHub</h1>
             </div>
             <div class="nav-menu text-white1">
-                <div class="nav-txt pt-9">
-                    <a href="dashboard" class="w-full h-10 rounded-md text-start hover:border hover:text-white block pl-3">
-                        <i class='bx bxs-user'></i>User
-                    </a>
-                </div>
-                <div class="nav-txt">
-                    <button class="w-full h-12 rounded-md text-start border text-white">
-                        <p class="pl-3"><i class='bx bx-cart'></i>Barang</p>
-                    </button>
-                </div>
-                <div class="nav-txt">
-                    <a href="jasa" class="w-full h-10 rounded-md text-start hover:border hover:text-white block pl-3">
-                        <i class='bx bxs-user-rectangle'></i>Jasa
-                    </a>
-                </div>
-                <form action="{{ route('logout') }}" method="post" class="nav-txt pt-80">
+                <div class="nav-txt pt-9 "><button class="w-full h-10 rounded-md text-start hover:border hover:text-white"><a href="dashboard" class="pl-3"><i class='bx bxs-user'></i>User</a></button></div>
+                <div class="nav-txt "><button class=" w-full h-12 rounded-md text-start border text-white "><p class="pl-3 w-full h-full"><i class='bx bx-cart'></i>Barang</p></button></div>
+                <div class="nav-txt "><button class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="jasa" class="pl-3 w-full h-full"><i class='bx bxs-user-rectangle'></i>Jasa</a></button></div>
+                <div class="nav-txt "><button class=" w-full h-10 rounded-md text-start hover:border hover:text-white "><a href="list" class="pl-3 w-full h-full"><i class='bx bxs-data'></i>List</a></button></div>
+                <form action="{{ route('logout') }}" method="post">
                     @csrf
-                    <button type="submit" class="w-full h-14 rounded-md text-start border border-white3 hover:border-white hover:text-white transition transform hover:scale-95">
-                        <p class="pl-12 font-semibold text-xl">
-                            <i class='bx bx-exit'></i>Logout
-                        </p>
-                    </button>
+                    <div class="nav-txt pt-72"><button
+                            class=" w-full h-14 rounded-md text-start border border-white3 hover:border-white hover:text-white transition transform hover:scale-95">
+                            <p class=" pl-12 pt-3 font-semibold text-xl w-full h-full"><i
+                                    class='bx bx-exit'></i>Logout</p>
+                        </button></div>
                 </form>
             </div>
         </div>

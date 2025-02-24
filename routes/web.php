@@ -20,12 +20,12 @@ route::post('logout', [AuthController::class, 'logout'])->name('logout');
 // harus login terlebih dahulu
 Route::middleware(['auth'])->group(function () {
     // layout
-    route::get('home', [HomeController::class, 'index'])->name('home.index');
     route::resource('data', ServiceController::class)->only('index', 'store');
     Route::get('pendataan', [ServiceController::class, 'data'])->name('pendataan');
     Route::delete('data/{id}', [ServiceController::class, 'destroy'])->name('data.destroy');
 
     // admin
+    Route::get('list', [ListController::class, 'index'])->name('list.index');
     // User
     Route::resource('dashboard', AuthController::class)->except(['show']);
     Route::get('/dashboard/{id_user}/edit', [AuthController::class, 'edit'])->name('dashboard.edit');
