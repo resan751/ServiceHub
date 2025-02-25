@@ -13,9 +13,19 @@ use Illuminate\Http\Request;
 
 class ListController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::with(['user', 'details.barang', 'details.jasa'])->get();
-    return view('layout.list', compact('services'));
+        $bulan = $request->input('bulan', date('m'));
+        $tahun = $request->input('tahun', date('Y'));
+
+        $services = Service::with(['user', 'details.barang', 'details.jasa'])
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->get();
+
+        $jumlahTransaksi = $services->count();
+        $totalPendapatan = $services->sum('total_harga');
+
+        return view('layout.list', compact('services', 'bulan', 'tahun', 'jumlahTransaksi', 'totalPendapatan'));
     }
 }

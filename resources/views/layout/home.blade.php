@@ -22,6 +22,10 @@
             background-attachment: fixed;
         }
 
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
     }
 </style>
 </head>
@@ -83,9 +87,51 @@
                 href="{{ route('pendataan') }}"><i class='bx bxs-data'></i>pendataan</a></button>
     </div>
     <div class="main bg-white7 w-full h-auto top-[21rem] absolute text-white5">
+        <form action="{{ route('data.index') }}" method="get" class="mb-4 p-4 bg-black3 rounded-lg m-1">
+            <div class="flex gap-4 items-center">
+                <div>
+                    <label for="bulan" class="text-white5">Filter Bulan:</label>
+                    <select name="bulan" id="bulan" class="p-2 border rounded bg-white5 text-black3">
+                        @for ($i = 1; $i <= 12; $i++)
+                            <option value="{{ sprintf('%02d', $i) }}" {{ $bulan == sprintf('%02d', $i) ? 'selected' : '' }}>
+                                {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+
+                <div>
+                    <label for="tahun" class="text-white5">Tahun:</label>
+                    <select name="tahun" id="tahun" class="p-2 border rounded bg-white5 text-black3">
+                        @for ($i = date('Y'); $i >= 2020; $i--)
+                            <option value="{{ $i }}" {{ $tahun == $i ? 'selected' : '' }}>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+
+                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                    Filter
+                </button>
+            </div>
+        </form>
+
+        <div class="summary bg-black3 p-4 mb-4 rounded-lg m-1">
+            <h2 class="text-xl font-bold mb-2">Ringkasan {{ DateTime::createFromFormat('!m', $bulan)->format('F') }} {{ $tahun }}</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white5 text-black3 p-3 rounded-lg">
+                    <p class="font-semibold">Jumlah Transaksi:</p>
+                    <p class="text-2xl font-bold">{{ $jumlahTransaksi }}</p>
+                </div>
+                <div class="bg-white5 text-black3 p-3 rounded-lg">
+                    <p class="font-semibold">Total Pendapatan:</p>
+                    <p class="text-2xl font-bold">Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</p>
+                </div>
+            </div>
+        </div>
+
         <div class="main-back">
             <div class="main-menu">
-                <div class="flex flex-wrap">
+                <div class=" flex overflow-x-auto overflow-y-auto scrollbar-hide">
                     @forelse ($services as $item)
                         <div class="main-tran bg-black3 w-96 h-auto m-3 rounded-xl">
                             <div class=" font-semibold text-xl text-center w-full h-8 p-1 items-center">
@@ -107,12 +153,12 @@
                                     @if ($detail->id_barang)
                                         <div class="barang flex justify-between px-3">
                                             <p>Barang: {{ $detail->barang->nama_barang }}</p>
-                                            <p>Rp{{ number_format($detail->harga_satuan,  0, ',', '.') }}</p>
+                                            <p>Rp{{ number_format($detail->harga_satuan, 0, ',', '.') }}</p>
                                         </div>
                                     @elseif ($detail->id_jasa)
                                         <div class="jasa flex justify-between px-3">
                                             <p>Jasa: {{ $detail->jasa->nama_jasa }} </p>
-                                            <p>Rp{{number_format($detail->harga_satuan,  0, ',', '.') }}</p>
+                                            <p>Rp{{ number_format($detail->harga_satuan, 0, ',', '.') }}</p>
                                         </div>
                                     @endif
                                 </div>
@@ -123,17 +169,17 @@
                             <div class="transaksi w-full px-3 font-semibold">
                                 <div class="total flex justify-between">
                                     <p>total:</p>
-                                    <p>Rp{{number_format($item->total_harga,  0, ',', '.') }}</p>
+                                    <p>Rp{{ number_format($item->total_harga, 0, ',', '.') }}</p>
 
                                 </div>
                                 <div class="bayar flex justify-between">
                                     <p>bayar:</p>
-                                    <p>Rp{{number_format($item->dibayar,  0, ',', '.') }}</p>
+                                    <p>Rp{{ number_format($item->dibayar, 0, ',', '.') }}</p>
 
                                 </div>
                                 <div class="kembalian flex justify-between pb-2">
                                     <p>kembalian:</p>
-                                    <p>Rp{{ number_format($item->kembalian,  0, ',', '.') }}</p>
+                                    <p>Rp{{ number_format($item->kembalian, 0, ',', '.') }}</p>
                                 </div>
                             </div>
                             <hr class="w-full text-white">
@@ -142,12 +188,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                class="bg-white5 border-2 m-2 ml-[21rem]  border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 rounded p-1">
-                                <i class='bx bx-trash text-xl '></i>
-                            </button>
-                        </form>
-                        <hr class="w-full text-white">
-                        <h1 class="text-center font-bold text-3xl py-2">ServiceHub</h1>
+                                    class="bg-white5 border-2 m-2 ml-[21rem]  border-red-700 text-red-700 hover:bg-red-700 hover:text-white5 transition-colors duration-500 rounded p-1">
+                                    <i class='bx bx-trash text-xl '></i>
+                                </button>
+                            </form>
+                            <hr class="w-full text-white">
+                            <h1 class="text-center font-bold text-3xl py-2">ServiceHub</h1>
                         </div>
                     @empty
                         <p>Tidak ada service</p>

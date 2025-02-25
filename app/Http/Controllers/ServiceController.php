@@ -13,10 +13,20 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::with(['user', 'details.barang', 'details.jasa'])->get();
-    return view('layout.home', compact('services'));
+        $bulan = $request->input('bulan', date('m'));
+        $tahun = $request->input('tahun', date('Y'));
+
+        $services = Service::with(['user', 'details.barang', 'details.jasa'])
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->get();
+
+        $jumlahTransaksi = $services->count();
+        $totalPendapatan = $services->sum('total_harga');
+
+        return view('layout.home', compact('services', 'bulan', 'tahun', 'jumlahTransaksi', 'totalPendapatan'));
     }
     public function data()
     {
@@ -50,6 +60,17 @@ class ServiceController extends Controller
 
         if ($request->has('barang')) {
             foreach ($request->barang as $barang) {
+                if (!empty($barang['id_barang'])) {
+                    $barangModel = Barang::find($barang['id_barang']);
+                    if (!$barangModel || $barangModel->stok <= 0) {
+                        return redirect()->back()->with('error', 'Stok ' . $barangModel->nama_barang . ' tidak mencukupi');
+                    }
+                }
+            }
+        }
+
+        if ($request->has('barang')) {
+            foreach ($request->barang as $barang) {
                 if (!empty($barang['id_barang']) && isset($barang['harga'])) {
                     Detail::create([
                         'id_service' => $service->id_service,
@@ -58,6 +79,12 @@ class ServiceController extends Controller
                         'harga_satuan' => $barang['harga'],
                         'total_harga' => $barang['harga'],
                     ]);
+
+                    $barangModel = Barang::find($barang['id_barang']);
+                    if ($barangModel && $barangModel->stok > 0) {
+                        $barangModel->stok = $barangModel->stok - 1;
+                        $barangModel->save();
+                    }
                 }
             }
         }
@@ -80,16 +107,16 @@ class ServiceController extends Controller
     }
 
     public function destroy($id)
-{
-    // Cari service berdasarkan ID
-    $service = Service::findOrFail($id);
+    {
+        // Cari service berdasarkan ID
+        $service = Service::findOrFail($id);
 
-    // Hapus semua detail terkait dengan service ini
-    Detail::where('id_service', $service->id_service)->delete();
+        // Hapus semua detail terkait dengan service ini
+        Detail::where('id_service', $service->id_service)->delete();
 
-    // Hapus service setelah detailnya dihapus
-    $service->delete();
+        // Hapus service setelah detailnya dihapus
+        $service->delete();
 
-    return redirect()->route('home.index')->with('success', 'Transaksi berhasil dihapus');
-}
+        return redirect()->route('home.index')->with('success', 'Transaksi berhasil dihapus');
+    }
 }
